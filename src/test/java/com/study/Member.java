@@ -39,9 +39,6 @@ public class Member {
     @Temporal(TemporalType.DATE)
     private Date removeDate; //삭제일
 
-    @OneToMany(mappedBy = "member")
-    private List<Order> orderList;
-
     public Member() {
     }
 

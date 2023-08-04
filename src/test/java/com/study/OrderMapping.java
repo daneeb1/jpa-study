@@ -1,9 +1,6 @@
 package com.study;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity(name = "order_mapping")
 @Table(name = "tbl_order_mapping")
@@ -11,18 +8,21 @@ public class OrderMapping {
 
     @EmbeddedId
     private OrderPk orderPk;
-    @Column
-    private int orderNum;
-    @Column
-    private int productNum;
+    @ManyToOne
+    @JoinColumn(name = "order_num")
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "product")
+    private Product product;
 
     public OrderMapping() {
     }
 
-    public OrderMapping(OrderPk orderPk, int orderNum, int productNum) {
+    public OrderMapping(OrderPk orderPk, Order order, Product product) {
         this.orderPk = orderPk;
-        this.orderNum = orderNum;
-        this.productNum = productNum;
+        this.order = order;
+        this.product = product;
     }
 
     public OrderPk getOrderPk() {
@@ -33,28 +33,28 @@ public class OrderMapping {
         this.orderPk = orderPk;
     }
 
-    public int getOrderNum() {
-        return orderNum;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public int getProductNum() {
-        return productNum;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductNum(int productNum) {
-        this.productNum = productNum;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
     public String toString() {
         return "OrderMapping{" +
                 "orderPk=" + orderPk +
-                ", orderNum=" + orderNum +
-                ", productNum=" + productNum +
+                ", order=" + order +
+                ", product=" + product +
                 '}';
     }
 }

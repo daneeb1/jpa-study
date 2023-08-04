@@ -2,6 +2,7 @@ package com.study;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "order")
 @Table(name = "tbl_order")
@@ -22,16 +23,17 @@ public class Order {
     @Temporal(TemporalType.DATE)
     private Date orderRemoveDate; // 주문 삭제일
 
-    @JoinColumn(name = "member_no") //life cycle 하나로 관리하겠다 / 양방향에서 주인관계를 나타냄
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Member memberNo;
+    @Column(name = "member_no") //life cycle 하나로 관리하겠다 / 양방향에서 주인관계를 나타냄
+    private int memberNo;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderMapping> orderMappingList;
 
     //주문번호 1 : 회원 : 1
-
     public Order() {
     }
 
-    public Order(int orderNo, String orderStatus, Date orderDate, Date orderUpdateDate, Date orderRemoveDate, Member memberNo) {
+    public Order(int orderNo, String orderStatus, Date orderDate, Date orderUpdateDate, Date orderRemoveDate, int memberNo) {
         this.orderNo = orderNo;
         this.orderStatus = orderStatus;
         this.orderDate = orderDate;
@@ -80,11 +82,11 @@ public class Order {
         this.orderRemoveDate = orderRemoveDate;
     }
 
-    public Member getMemberNo() {
+    public int getMemberNo() {
         return memberNo;
     }
 
-    public void setMemberNo(Member memberNo) {
+    public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
     }
 

@@ -1,6 +1,7 @@
 package com.study;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "product")
 @Table(name = "tbl_product")
@@ -16,6 +17,9 @@ public class Product {
 
     @Column(name = "productPrice")
     private int productPrice;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderMapping> orderMappingList;
 
     public Product() {
     }
