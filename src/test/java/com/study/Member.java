@@ -3,6 +3,7 @@ package com.study;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "member")
 @Table(name = "tbl_member")
@@ -10,7 +11,7 @@ public class Member {
 
     @Id
     @Column(name = "member_no", nullable = false)
-    private int memberNo;
+    private int memberNo; //회원번호
     @Column(name = "member_name", nullable = false)
     private String memberName; //회원이름
     @Column(name = "nickname", nullable = false, length = 10, unique = true)
@@ -37,6 +38,9 @@ public class Member {
     @Column(name = "remove_date")
     @Temporal(TemporalType.DATE)
     private Date removeDate; //삭제일
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orderList;
 
     public Member() {
     }

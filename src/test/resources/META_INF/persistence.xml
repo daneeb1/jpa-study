@@ -3,9 +3,9 @@
 
     <persistence-unit name="jpatest">
         <class>com.study.Member</class>
-<!--        <class>com.study.Order</class>-->
-<!--        <class>com.study.OrderPk</class>-->
-<!--        <class>com.study.Product</class>-->
+        <class>com.study.Order</class>
+        <class>com.study.OrderPk</class>
+        <class>com.study.Product</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/menudb"/>

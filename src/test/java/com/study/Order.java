@@ -22,15 +22,22 @@ public class Order {
     @Temporal(TemporalType.DATE)
     private Date orderRemoveDate; // 주문 삭제일
 
+    @JoinColumn(name = "member_no") //life cycle 하나로 관리하겠다 / 양방향에서 주인관계를 나타냄
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Member memberNo;
+
+    //주문번호 1 : 회원 : 1
+
     public Order() {
     }
 
-    public Order(int orderNo, String orderStatus, Date orderDate, Date orderUpdateDate, Date orderRemoveDate) {
+    public Order(int orderNo, String orderStatus, Date orderDate, Date orderUpdateDate, Date orderRemoveDate, Member memberNo) {
         this.orderNo = orderNo;
         this.orderStatus = orderStatus;
         this.orderDate = orderDate;
         this.orderUpdateDate = orderUpdateDate;
         this.orderRemoveDate = orderRemoveDate;
+        this.memberNo = memberNo;
     }
 
     public int getOrderNo() {
@@ -73,6 +80,14 @@ public class Order {
         this.orderRemoveDate = orderRemoveDate;
     }
 
+    public Member getMemberNo() {
+        return memberNo;
+    }
+
+    public void setMemberNo(Member memberNo) {
+        this.memberNo = memberNo;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -81,6 +96,7 @@ public class Order {
                 ", orderDate=" + orderDate +
                 ", orderUpdateDate=" + orderUpdateDate +
                 ", orderRemoveDate=" + orderRemoveDate +
+                ", memberNo=" + memberNo +
                 '}';
     }
 }
